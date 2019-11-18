@@ -21,8 +21,8 @@ extension ChatViewController: MessageInputBarDelegate {
                 let manager = MessageInteractor.init(manager: MessageFirebase.init(discussion: self.actualDiscussion)).manager
                 
                 manager.add(message: message, onSuccess: {
-                    self.messages.append(message)
-                    self.messagesCollectionView.insertSections([self.messages.count - 1])
+                    //self.messages.append(message)
+                    //self.messagesCollectionView.insertSections([self.messages.count - 1])
                 }, onError: { (error) in
                     print(error)
                 })

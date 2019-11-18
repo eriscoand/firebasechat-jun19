@@ -40,7 +40,20 @@ public class MessageFirebase: MessageManager {
     }
     
     public func add(message: Message, onSuccess: @escaping () -> Void, onError: ErrorClosure?) {
-        onSuccess()
+        
+        let child = Message.toDict(message: message)
+        
+        self.ref.child(message.messageId).updateChildValues(child) { (error, _ ) in
+            
+            if let err = error, let retError = onError {
+                retError(err)
+            }
+            
+            onSuccess()
+            
+        }
+        
+        
     }
     
     

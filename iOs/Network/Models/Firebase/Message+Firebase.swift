@@ -50,4 +50,22 @@ extension Message {
         return message
     }
     
+    public class func toDict(message: Message) -> [String: String] {
+        
+        var dict = [String: String]()
+        
+        dict["messageId"] = message.messageId
+        dict["senderId"] = message.sender.id
+        dict["displayName"] = message.sender.displayName
+        
+        let date = Date.fromDateToString(date: Date(), format: "yyyy-MM-dd HH:mm:ss")
+        dict["sentDate"] = date
+        
+        dict["type"] = message.type
+        dict["value"] = message.value
+        
+        return dict
+        
+    }
+    
 }
