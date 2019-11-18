@@ -16,4 +16,8 @@ public class UserInteractor {
         self.manager = manager
     }
     
+    public convenience init(){
+        self.init(manager: UserFirebase())
+    }
+    
 }

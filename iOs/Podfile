@@ -5,6 +5,8 @@ inhibit_all_warnings!
 target 'ChatKeepcoding' do
     
   pod 'MessageKit'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|
