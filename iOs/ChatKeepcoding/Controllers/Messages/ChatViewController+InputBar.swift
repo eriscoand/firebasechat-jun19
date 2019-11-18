@@ -18,7 +18,7 @@ extension ChatViewController: MessageInputBarDelegate {
                 let data = MessageData.text(text)
                 let message = Message.init(sender: currentSender(), data: data, type: MessageTypeEnum.text.rawValue, value: text)
                 
-                let manager = MessageInteractor.init(manager: MessageDummy.init(discussion: self.actualDiscussion)).manager
+                let manager = MessageInteractor.init(manager: MessageFirebase.init(discussion: self.actualDiscussion)).manager
                 
                 manager.add(message: message, onSuccess: {
                     self.messages.append(message)

@@ -16,4 +16,5 @@ public class DiscussionInteractor{
         self.manager = manager
     }
     
+    
 }
