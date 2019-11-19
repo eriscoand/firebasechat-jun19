@@ -8,6 +8,7 @@
 
 import Foundation
 import MessageKit
+import Kingfisher
 
 extension ChatViewController: MessagesDataSource {
     
@@ -17,6 +18,7 @@ extension ChatViewController: MessagesDataSource {
         
         manager.list(onSuccess: { (messages) in
             self.messages = messages
+            self.downloadImages(array: messages)
             self.messagesCollectionView.reloadData()
             self.messagesCollectionView.scrollToBottom()
         }) { (error) in
@@ -36,4 +38,32 @@ extension ChatViewController: MessagesDataSource {
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return self.messages[indexPath.section]
     }
+    
+    func downloadImages(array: [Message]){
+        
+        for(index, message) in array.enumerated(){
+            
+            switch message.data {
+            case .photo:
+                
+                let image = UIImageView()
+                let url = URL.init(string: message.value)
+                
+                image.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { (image, _,_,_) in
+                    if let image = image {
+                        message.data = MessageData.photo(image)
+                        self.messages[index] = message
+                        self.messagesCollectionView.reloadData()
+                    }
+                }
+                
+                break
+                
+            default: break
+            }
+            
+        }
+        
+    }
+    
 }
